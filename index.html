@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розклад ІР-21</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4285F4; --bg: #f8f9fa; --text: #333; --white: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; text-align: center; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        select, input, button { padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 1rem; outline: none; }
+        button { background: var(--primary); color: white; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:hover { opacity: 0.9; }
+        .tabs { display: flex; gap: 5px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+        .tab { padding: 10px 20px; background: #e0e0e0; border-radius: 20px; cursor: pointer; white-space: nowrap; }
+        .tab.active { background: var(--primary); color: white; }
+        .lesson-card { background: var(--white); padding: 15px; border-radius: 12px; border-left: 6px solid var(--primary); margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .lesson-time { font-weight: bold; color: var(--primary); }
+        .lesson-details { font-size: 0.9rem; color: #666; margin-top: 5px; }
+        .subgroup-label { font-size: 0.8rem; background: #eee; padding: 2px 8px; border-radius: 10px; float: right; }
+        .full-schedule-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+        .full-schedule-table th, .full-schedule-table td { padding: 12px; border: 1px solid #eee; text-align: left; font-size: 0.85rem; }
+        .full-schedule-table th { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>Розклад групи ІР-21</h2>
+        <p id="current-info-display"></p>
+    </div>
+
+    <div class="controls">
+        <select id="subgroup-select" onchange="refreshView()">
+            <option value="1">1 Підгрупа</option>
+            <option value="2">2 Підгрупа</option>
+        </select>
+        <input type="date" id="date-picker" onchange="setView('day')">
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" id="tab-day" onclick="setView('day')">Сьогодні / Дата</div>
+        <div class="tab" id="tab-week" onclick="setView('week')">На тиждень</div>
+        <div class="tab" id="tab-full" onclick="setView('full')">Усі 19 тижнів</div>
+    </div>
+
+    <div id="content-area"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
